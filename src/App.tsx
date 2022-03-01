@@ -1,7 +1,16 @@
-import DrawCanvas from "./components/DrawCanvas";
+import React from "react";
+import "./App.css";
+import TodoList from "./components/TodoList";
 
-function App() {
-  return <DrawCanvas />;
-}
+const App: React.FC = () => {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <TodoList />
+      </header>
+
+    </div>
+  );
+};
 
 export default App;
