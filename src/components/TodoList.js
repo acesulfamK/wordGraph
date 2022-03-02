@@ -1,80 +1,38 @@
 import React, { useState } from 'react';
-
-const Todo = ( {text} )=>{
-  const[completed,setState] = useState(false);
-  return(
-    <li
-      onClick={ e => setState(!completed)}
-      style={{
-        textDecoration : completed ? 'line-through' : 'none'
-      }}
-      >
-          {text}
-      </li>
-  )
-}
+import AddEdge from './AddEdge';
+import AddTodo from './AddTodo';
+import Todo from './Todo';
 
 
-function AddTodo( {addTodo}){
-  const[inputText,setInputText]= useState('');
-  
-  return (
-    <form
-      onSubmit = {e =>{
-        e.preventDefault();
-        if(!inputText.trim()){
-          return;
-        }
-        addTodo(inputText);
-        setInputText('');
-      }}
-      >
-        <input 
-          type="text"
-          value={inputText}
-          onChange= {e=>setInputText(e.target.value)}
-          />
-        <button type="submit">Add Todo</button>
 
 
-      </form>
-
-  );
-}
-
-function Edge( { text } ){
-   const [dom, setDom]= useState(["dom!"]);
-   const [cod, setCod]= useState(["cod!"]);
-    
+function Edge(  props ){
    return(
      <div>
-       { text } : {cod}->{dom}
+       { props.name } : {props.cod}-{props.dom}
      </div>
    );
 }
 
-
 function TodoList() {
     const [todos, setTodo] = useState([]);
-    const [ edges , setEdge ]= useState([
-      "edge1",
-      "edge2",
-      "edge3",
-    ]);
-  
+    const [ edges , setEdge ]= useState([]);
     // todosを基に<Todo />の配列を作成
     return (
       <div>
         <AddTodo addTodo={newTodo =>setTodo(todos.concat(newTodo))} />
+        <AddEdge addEdge={newEdge =>setEdge(edges.concat(newEdge))} />
         <ul>
+          words
           {todos.map((todo, index) => (
             <Todo key={index} text={todo} />
           ))}
         </ul>
         ============================
         <ul>
+          edges
           {edges.map((edge, index) => (
-            <Edge key={index} text={edge} />
+            <Edge key={index} name={edge.name} cod={edge.cod} dom={edge.dom} />
           ))}
         </ul>
       </div>
