@@ -8,4 +8,4 @@ function Edge(  props ){
     );
  }
 
-export default Edges;
+export default Edge;
