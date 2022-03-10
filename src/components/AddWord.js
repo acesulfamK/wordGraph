@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-function AddTodo( {addTodo}){
+function AddWord( {addWord}){
     const[inputText,setInputText]= useState('');
     
     return (
@@ -10,7 +10,7 @@ function AddTodo( {addTodo}){
           if(!inputText.trim()){
             return;
           }
-          addTodo(inputText);
+          addWord({"word":inputText});
           setInputText('');
         }}
         >
@@ -19,7 +19,7 @@ function AddTodo( {addTodo}){
             value={inputText}
             onChange= {e=>setInputText(e.target.value)}
             />
-          <button type="submit">Add Todo</button>
+          <button type="submit">Add Word</button>
   
   
         </form>
@@ -28,4 +28,4 @@ function AddTodo( {addTodo}){
   }
   
 
-  export default AddTodo;
+  export default AddWord;

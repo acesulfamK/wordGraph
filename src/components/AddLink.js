@@ -1,10 +1,10 @@
 
 import React, {useState} from 'react';
 
-function AddEdge( {addEdge}){
+function AddLink( {addLink}){
     const[inputText,setInputText]= useState('');
-    const[inputCod,setInputCod]= useState('');
-    const[inputDom,setInputDom]= useState('');
+    const[inputSource,setInputSource]= useState('');
+    const[inputTarget,setInputTarget]= useState('');
   
     
     return (
@@ -14,10 +14,10 @@ function AddEdge( {addEdge}){
           if(!inputText.trim()){
             return;
           }
-          addEdge({name:inputText,cod:inputCod,dom:inputDom});
+          addLink({"name":inputText,"source":Number(inputSource),"target":Number(inputTarget)});
           setInputText('');
-          setInputCod('');
-          setInputDom('');
+          setInputSource('');
+          setInputTarget('');
         }}
         >
           <input
@@ -25,21 +25,23 @@ function AddEdge( {addEdge}){
             value={inputText}
             onChange= {e=>setInputText(e.target.value)}
             />
+
           <input
             type="text"
-            value={inputCod}
-            onChange= {e=>setInputCod(e.target.value)}
+            value={inputSource}
+            onChange= {e=>setInputSource(e.target.value)}
           />
+            
           <input
             type="text"
-            value={inputDom}
-            onChange= {e=>setInputDom(e.target.value)}
+            value={inputTarget}
+            onChange= {e=>setInputTarget(e.target.value)}
           />
-          <button type="submit">Add Edge</button>
+          <button type="submit">Add Links</button>
           
         </form>
   
     );
   }
 
-export default AddEdge;
+export default AddLink;

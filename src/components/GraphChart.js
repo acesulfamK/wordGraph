@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 
 function GraphChart({ data }) {
   const ref = useD3(
+
     (svg) => {
     svg.append("g")
       .attr("class","link");
@@ -11,16 +12,14 @@ function GraphChart({ data }) {
     svg.append("g")
       .attr("class","node");
       
-    const nodesData = data.nodes;
+    svg.append("g")
+      .attr("class","text");
      
-    const linksData = data.links;
 
-    
-     
       // 2. svg要素を配置
       var link = d3.select("g.link")
         .selectAll("line")
-        .data(linksData)
+        .data(data.links)
         .enter()
         .append("line")
         .attr("stroke-width", 1)
@@ -28,11 +27,20 @@ function GraphChart({ data }) {
      
       var node = d3.select("g.node")
         .selectAll("circle")
-        .data(nodesData)
+        .data(data.nodes)
         .enter()
         .append("circle")
         .attr("r", 7)
         .attr("fill", "LightSalmon");
+      
+        var text = d3.select("g.text")
+        .selectAll("text")
+        .data(data.nodes)
+        .enter()
+        .append("text")
+        .attr("font-size","10px")
+        .attr("fill","white")
+        .text(function(d){ return d.word});
         
       // 3. forceSimulation設定
       var simulation = d3.forceSimulation()
@@ -41,11 +49,11 @@ function GraphChart({ data }) {
         .force("center", d3.forceCenter(200, 150));
      
       simulation
-        .nodes(nodesData)
+        .nodes(data.nodes)
         .on("tick", ticked);
-     
+    
       simulation.force("link")
-        .links(linksData);
+        .links(data.links);
      
       // 4. forceSimulation 描画更新用関数
       function ticked() {
@@ -57,12 +65,13 @@ function GraphChart({ data }) {
         node
           .attr("cx", function(d) { return d.x; })
           .attr("cy", function(d) { return d.y; });
+        text
+          .attr("x", function(d) { return d.x; })
+          .attr("y", function(d) { return d.y; });
       }
-     
-      // 5. ドラッグ時のイベント関数
       
     },
-    [data.length]
+    [data.nodes.length,data.links.length]
   );
 
   return (
@@ -76,7 +85,7 @@ function GraphChart({ data }) {
       }}
     >
       <g className="plot-area" />
-    
+
     </svg>
   );
 }

@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-import TodoList from "./components/TodoList";
+import Body from "./components/Body";
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <TodoList />
+        <Body />
       </header>
 
     </div>
