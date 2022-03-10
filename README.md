@@ -1,4 +1,33 @@
-# Getting Started with Create React App
+# I have trouble to combine React and D3.js.
+## このソフトの仕様
+一番上の記入欄から単語を登録できる。
+上から2番目の記入欄から単語間のリンクを登録できる(右から順に「好きなリンク名前」「リンクが出る単語の配列番号」「リンクが入る単語の配列番号」を記入)。
+すると、Words Listの所に登録した単語が、Links Listのところに登録したリンクが表示される。
+登録した単語とリンクはグラフとして表示される。
+
+## うまくいっていないところ
+
+Body.jsにおいて、dataオブジェクトはリストとして表示されたり、追加欄によって追加されるデータであり、これらのコンポーネントの中では正常に働きます。data2オブジェクトは、グラフに表示されるデータを持っており、このコンポーネントの中で正常に働きます。私のしたいことは、このdataとdata2オブジェクトを同一のものにしたいです。つまり、追加欄によって追加した単語がリストやグラフに反映されるようにしたいです。
+
+しかし、単にdata2オブジェクトを消して、Body.js内のdata2の部分をdataに変えただけではうまくいきませんでした。具体的に述べると、リロード直後はグラフもリストも正常に表示されますが、追加欄から新たな単語やリンクを追加するためにAddボタンを押すと、画面が真っ白になり反応しなくなります。
+
+## 考えられる原因
+
+data2オブジェクトを消して、dataオブジェクトだけで追加欄、リスト、グラフの全体の単語を管理するようにすると、<GraphChart>コンポーネントが表示されたあと、dataオブジェクトにグラフ内での座標などのデータが追加されてしまっていることがわかりました。つまり、<GraphChart>内で、<Body>コンポーネントのstateであるdataオブジェクトにアクセスされているようです。そこで、値渡しをしてから代入などをしましたがうまくいきませんでした。
+
+## 行いたい改善
+
+Body.js内のdataオブジェクトにはテストデータにあるように、ノードの表す単語、リンクの名前、リンクの出所、リンクの行先、だけの情報を持たせて、グラフ上におけるノードやリンクの座標といった描画の際に必要になる情報は<GraphChart>コンポーネント内で管理したい。
+
+## 参考にしたサイト
+
+D3.jsをReact内で使う
+https://www.pluralsight.com/guides/using-d3.js-inside-a-react-app
+
+D3.jsによるグラフの表示
+https://wizardace.com/d3-forcesimulation-simple/
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -22,7 +22,7 @@ function Body() {
         ]
       ,
         "links":[
-        {"name":"fruits","source":0,"target":1},
+        {"name":"fruits","source":0,"target":1},//{"name":リンクの名前,"source":リンクの出ているノードの配列番号,"target",出ているノードの配列番号}
         {"name":"fruits","source":1,"target":2},
         {"name":"fruits","source":1,"target":3},
         {"name":"fruits","source":3,"target":4},
